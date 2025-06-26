@@ -30,6 +30,7 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
@@ -62,7 +63,83 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow: -moz-scrollbars-none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+    background: transparent;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar-track {
+    display: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar-thumb {
+    display: none;
+  }
+
+  /* Global scrollbar hiding */
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  *::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  .animate-scroll {
+    animation: scroll 20s linear infinite;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+
+  /* Responsive text utilities */
+  @media (max-width: 480px) {
+    .velocity-text {
+      font-size: 10px !important;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 640px) {
+    .velocity-text {
+      font-size: 12px !important;
+    }
+  }
+
+  @media (min-width: 641px) and (max-width: 768px) {
+    .velocity-text {
+      font-size: 15px !important;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .velocity-text {
+      font-size: 25px !important;
+    }
   }
 }
