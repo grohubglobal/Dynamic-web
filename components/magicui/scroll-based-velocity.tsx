@@ -110,11 +110,12 @@ export function VelocityScroll({
   return (
     <div
       className={cn(
-        "relative w-full text-4xl font-bold tracking-[-0.02em] md:text-7xl md:leading-[5rem]",
+        "relative w-[300px] mx-auto overflow-hidden text-2xl font-bold tracking-[-0.02em]",
         className,
       )}
       {...props}
     >
+
       {Array.from({ length: numRows }).map((_, i) => (
         <ParallaxText
           key={i}
