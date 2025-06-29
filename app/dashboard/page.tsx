@@ -4,12 +4,12 @@ import type React from "react";
 import { useState } from "react";
 import { useProfileData, useFormData, useSettings } from "./utils/hooks";
 import { generateShareText } from "./utils/utils";
-import { ProfileSection } from "./sections/ProfileSection";
-import { NavigationTabs } from "./sections/NavigationTabs";
-import { TabContent } from "./sections/TabContent";
-import { EditModal } from "./sections/EditModal";
-import { ShareModal } from "./sections/ShareModal";
-import { SettingsModal } from "./sections/SettingsModal";
+import { ProfileSection } from "./modules/ProfileSection/ProfileSection";
+import { NavigationTabs } from "./modules/NavigationTabs/NavigationTabs";
+import { TabContent } from "./modules/TabContent/TabContent";
+import { Edit } from "./modules/Edit/Edit";
+import { Share } from "./modules/Share/Share";
+import { Settings } from "./modules/Settings/Settings";
 
 const UPLOAD_DELAY = 1500;
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
@@ -154,7 +154,12 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-[#2B0A75] via-[#4B1F9B] to-[#601EF2] text-white transition-all duration-300">
+    <div
+      className="min-h-screen text-white transition-all duration-300"
+      style={{
+        background: "linear-gradient(135deg, #4D0E98 31%, #190532 100%)",
+      }}
+    >
       <ProfileSection
         profileData={profileData}
         onEditClick={() => setIsEditModalOpen(true)}
@@ -166,7 +171,7 @@ export default function Dashboard() {
 
       <TabContent activeTab={activeTab} />
 
-      <EditModal
+      <Edit
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
         formData={formData}
@@ -185,14 +190,14 @@ export default function Dashboard() {
         setIsUploading={setIsUploading}
       />
 
-      <ShareModal
+      <Share
         isOpen={isShareModalOpen}
         onClose={() => setIsShareModalOpen(false)}
         profileData={profileData}
         onShare={handleShare}
       />
 
-      <SettingsModal
+      <Settings
         isOpen={isSettingsModalOpen}
         onClose={() => setIsSettingsModalOpen(false)}
         settings={settings}

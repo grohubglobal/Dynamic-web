@@ -5,19 +5,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
 import { Shield, Bell, Palette, User, Download, Trash2 } from "lucide-react";
-import { SettingsData } from "../utils/types";
+import { SettingsData } from "../../utils/types";
+import styles from "./Settings.module.css";
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -33,7 +23,7 @@ interface SettingsModalProps {
   onDataDownload: () => void;
 }
 
-export const SettingsModal = ({
+export const Settings = ({
   isOpen,
   onClose,
   settings,
@@ -47,12 +37,12 @@ export const SettingsModal = ({
     title: string,
     children: React.ReactNode
   ) => (
-    <div className="space-y-4">
-      <div className="flex items-center space-x-2">
-        {icon}
-        <h3 className="font-semibold text-lg">{title}</h3>
+    <div className={styles.settingGroup}>
+      <div className={styles.groupHeader}>
+        <span className={styles.groupIcon}>{icon}</span>
+        <h3 className={styles.groupTitle}>{title}</h3>
       </div>
-      <div className="bg-[#7E30E1]/10 p-4 rounded-lg space-y-4">{children}</div>
+      <div className={styles.groupContent}>{children}</div>
     </div>
   );
 
@@ -63,15 +53,23 @@ export const SettingsModal = ({
     description: string,
     checked: boolean
   ) => (
-    <div className="flex items-center justify-between">
-      <div className="space-y-1">
-        <Label className="text-sm font-medium">{label}</Label>
-        <p className="text-xs text-gray-600">{description}</p>
+    <div className={styles.settingItem}>
+      <div className={styles.settingLabel}>
+        <label className={styles.labelText}>{label}</label>
+        <p className={styles.labelDescription}>{description}</p>
       </div>
-      <Switch
-        checked={checked}
-        onCheckedChange={(value) => onSettingsChange(category, field, value)}
-      />
+      <div className={styles.settingControl}>
+        <button
+          type="button"
+          role="switch"
+          aria-checked={checked}
+          aria-label={`${label}: ${checked ? "enabled" : "disabled"}`}
+          onClick={() => onSettingsChange(category, field, !checked)}
+          className={`${styles.switch} ${checked ? styles.switchChecked : ""}`}
+        >
+          <span className={styles.switchThumb}></span>
+        </button>
+      </div>
     </div>
   );
 
@@ -83,28 +81,25 @@ export const SettingsModal = ({
     value: string,
     options: Array<{ value: string; label: string }>
   ) => (
-    <div className="flex items-center justify-between">
-      <div className="space-y-1">
-        <Label className="text-sm font-medium">{label}</Label>
-        <p className="text-xs text-gray-600">{description}</p>
+    <div className={styles.settingItem}>
+      <div className={styles.settingLabel}>
+        <label className={styles.labelText}>{label}</label>
+        <p className={styles.labelDescription}>{description}</p>
       </div>
-      <Select
-        value={value}
-        onValueChange={(newValue) =>
-          onSettingsChange(category, field, newValue)
-        }
-      >
-        <SelectTrigger className="w-32">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
+      <div className={styles.settingControl}>
+        <select
+          value={value}
+          onChange={(e) => onSettingsChange(category, field, e.target.value)}
+          className={styles.select}
+          aria-label={label}
+        >
           {options.map((option) => (
-            <SelectItem key={option.value} value={option.value}>
+            <option key={option.value} value={option.value}>
               {option.label}
-            </SelectItem>
+            </option>
           ))}
-        </SelectContent>
-      </Select>
+        </select>
+      </div>
     </div>
   );
 
@@ -116,36 +111,42 @@ export const SettingsModal = ({
     variant: "outline" | "destructive" = "outline",
     icon?: React.ReactNode
   ) => (
-    <div className="flex items-center justify-between">
-      <div className="space-y-1">
-        <Label
-          className={`text-sm font-medium ${
-            variant === "destructive" ? "text-red-600" : ""
+    <div className={styles.settingItem}>
+      <div className={styles.settingLabel}>
+        <label
+          className={`${styles.labelText} ${
+            variant === "destructive" ? styles.destructiveLabel : ""
           }`}
         >
           {label}
-        </Label>
-        <p className="text-xs text-gray-600">{description}</p>
+        </label>
+        <p className={styles.labelDescription}>{description}</p>
       </div>
-      <Button onClick={onClick} variant={variant} size="sm">
-        {icon && <span className="mr-2">{icon}</span>}
-        {buttonText}
-      </Button>
+      <div className={styles.settingControl}>
+        <button
+          onClick={onClick}
+          className={`${styles.button} ${
+            variant === "destructive" ? styles.buttonDestructive : ""
+          }`}
+          aria-label={`${buttonText} - ${description}`}
+        >
+          {icon && <span className={styles.buttonIcon}>{icon}</span>}
+          {buttonText}
+        </button>
+      </div>
     </div>
   );
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-white text-black max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="text-xl font-bold text-center">
-            Settings
-          </DialogTitle>
+      <DialogContent className={styles.modal}>
+        <DialogHeader className={styles.header}>
+          <DialogTitle className={styles.title}>Settings</DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-6 py-4">
+        <div className={styles.content}>
           {renderSettingGroup(
-            <Shield className="w-5 h-5 text-[#7E30E1]" />,
+            <Shield />,
             "Privacy & Security",
             <>
               {renderSelectSetting(
@@ -160,7 +161,7 @@ export const SettingsModal = ({
                   { value: "connections", label: "Connections Only" },
                 ]
               )}
-              <Separator />
+              <div className={styles.separator}></div>
               {renderSwitchSetting(
                 "privacy",
                 "showEmail",
@@ -186,7 +187,7 @@ export const SettingsModal = ({
           )}
 
           {renderSettingGroup(
-            <Bell className="w-5 h-5 text-[#7E30E1]" />,
+            <Bell />,
             "Notifications",
             <>
               {renderSwitchSetting(
@@ -228,7 +229,7 @@ export const SettingsModal = ({
           )}
 
           {renderSettingGroup(
-            <Palette className="w-5 h-5 text-[#7E30E1]" />,
+            <Palette />,
             "Appearance",
             <>
               {renderSelectSetting(
@@ -273,7 +274,7 @@ export const SettingsModal = ({
           )}
 
           {renderSettingGroup(
-            <User className="w-5 h-5 text-[#7E30E1]" />,
+            <User />,
             "Account",
             <>
               {renderSwitchSetting(
@@ -290,14 +291,14 @@ export const SettingsModal = ({
                 "Get notified of new login attempts",
                 settings.account.loginAlerts
               )}
-              <Separator />
+              <div className={styles.separator}></div>
               {renderButtonSetting(
                 "Download Your Data",
                 "Export all your profile data",
                 "Download",
                 onDataDownload,
                 "outline",
-                <Download className="w-4 h-4" />
+                <Download />
               )}
               {renderButtonSetting(
                 "Delete Account",
@@ -305,21 +306,24 @@ export const SettingsModal = ({
                 "Delete",
                 onDeleteAccount,
                 "destructive",
-                <Trash2 className="w-4 h-4" />
+                <Trash2 />
               )}
             </>
           )}
 
-          <div className="flex space-x-3 pt-4">
-            <Button
+          <div className={styles.buttonGroup}>
+            <button
               onClick={onSave}
-              className="flex-1 bg-[#7E30E1] hover:bg-[#49108B] text-white"
+              className={`${styles.button} ${styles.buttonPrimary} ${styles.buttonFull}`}
             >
               Save Settings
-            </Button>
-            <Button onClick={onClose} variant="outline" className="flex-1">
+            </button>
+            <button
+              onClick={onClose}
+              className={`${styles.button} ${styles.buttonFull}`}
+            >
               Cancel
-            </Button>
+            </button>
           </div>
         </div>
       </DialogContent>

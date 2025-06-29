@@ -6,13 +6,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
 import {
   Upload,
   Check,
@@ -24,7 +17,9 @@ import {
   Mail,
   Github,
 } from "lucide-react";
-import { ProfileData, FormErrors, SocialVerification } from "../utils/types";
+import { ProfileData, FormErrors, SocialVerification } from "../../utils/types";
+import styles from "./Edit.module.css";
+import Image from "next/image";
 
 interface EditModalProps {
   isOpen: boolean;
@@ -45,7 +40,7 @@ interface EditModalProps {
   setIsUploading: (uploading: boolean) => void;
 }
 
-export const EditModal = ({
+export const Edit = ({
   isOpen,
   onClose,
   formData,
@@ -74,13 +69,15 @@ export const EditModal = ({
 
   const handleSkillKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
+      e.preventDefault();
       onAddSkill();
     }
   };
 
   const renderVerificationIcon = (status: boolean | null) => {
-    if (status === true) return <Check className="w-4 h-4 text-green-500" />;
-    if (status === false) return <X className="w-4 h-4 text-red-500" />;
+    if (status === true)
+      return <Check className={styles.verificationIconGreen} />;
+    if (status === false) return <X className={styles.verificationIconRed} />;
     return null;
   };
 
@@ -92,23 +89,23 @@ export const EditModal = ({
     error?: string,
     type: string = "text"
   ) => (
-    <div className="space-y-2">
-      <Label htmlFor={id} className="text-sm font-medium">
+    <div className={styles.formField}>
+      <label htmlFor={id} className={styles.label}>
         {label}
-      </Label>
-      <Input
+      </label>
+      <input
         id={id}
         type={type}
         value={value}
         onChange={(e) => onInputChange(id, e.target.value)}
         placeholder={placeholder}
-        className={`w-full ${error ? "border-red-500" : ""}`}
+        className={`${styles.input} ${error ? styles.inputError : ""}`}
       />
       {error && (
-        <Alert className="border-red-500 bg-red-50">
-          <X className="h-4 w-4 text-red-500" />
-          <AlertDescription className="text-red-700">{error}</AlertDescription>
-        </Alert>
+        <div className={styles.alert}>
+          <X className={styles.alertIcon} />
+          <p className={styles.alertText}>{error}</p>
+        </div>
       )}
     </div>
   );
@@ -121,83 +118,80 @@ export const EditModal = ({
     value: string,
     error?: string
   ) => (
-    <div className="space-y-2">
-      <Label
-        htmlFor={platform}
-        className="text-sm font-medium flex items-center gap-2"
-      >
-        {icon}
-        {label}
-        {renderVerificationIcon(
-          socialVerification[platform as keyof SocialVerification]
-        )}
-      </Label>
-      <Input
+    <div className={styles.formField}>
+      <label htmlFor={platform} className={styles.label}>
+        <span className={styles.labelContent}>
+          {icon}
+          <span className={styles.labelText}>{label}</span>
+          {renderVerificationIcon(
+            socialVerification[platform as keyof SocialVerification]
+          )}
+        </span>
+      </label>
+      <input
         id={platform}
         value={value}
         onChange={(e) => onInputChange(`social.${platform}`, e.target.value)}
         placeholder={placeholder}
-        className={`w-full ${error ? "border-red-500" : ""}`}
+        className={`${styles.input} ${error ? styles.inputError : ""}`}
       />
       {error && (
-        <Alert className="border-red-500 bg-red-50">
-          <X className="h-4 w-4 text-red-500" />
-          <AlertDescription className="text-red-700">{error}</AlertDescription>
-        </Alert>
+        <div className={styles.alert}>
+          <X className={styles.alertIcon} />
+          <p className={styles.alertText}>{error}</p>
+        </div>
       )}
     </div>
   );
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-white text-black max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="text-xl font-bold text-center">
-            Edit Profile
-          </DialogTitle>
+      <DialogContent className={styles.modal}>
+        <DialogHeader className={styles.header}>
+          <DialogTitle className={styles.title}>Edit Profile</DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-6 py-4">
-          <div className="space-y-4">
-            <h3 className="font-semibold text-lg border-b pb-2">
-              Profile Picture
-            </h3>
-            <div className="flex flex-col items-center space-y-4">
-              <Avatar className="w-24 h-24 bg-gray-200">
+        <div className={styles.content}>
+          <div className={styles.section}>
+            <h3 className={styles.sectionTitle}>Profile Picture</h3>
+            <div className={styles.avatarContainer}>
+              <div className={styles.avatar}>
                 {formData.profileImage ? (
-                  <AvatarImage src={formData.profileImage} alt="Profile" />
+                  <Image
+                    src={formData.profileImage}
+                    alt="Profile"
+                    className={styles.avatarImage}
+                  />
                 ) : (
-                  <AvatarFallback className="bg-gray-200 text-gray-600 text-2xl">
-                    👤
-                  </AvatarFallback>
+                  <span className={styles.avatarPlaceholder}>👤</span>
                 )}
-              </Avatar>
+              </div>
 
-              <div className="flex space-x-2">
-                <Button
+              <div className={styles.avatarButtons}>
+                <button
                   type="button"
                   onClick={handleFileUpload}
                   disabled={isUploading}
-                  className="bg-[#7E30E1] hover:bg-[#49108B] text-white"
+                  className={`${styles.button} ${styles.buttonPrimary}`}
                 >
                   {isUploading ? (
                     "Uploading..."
                   ) : (
                     <>
-                      <Upload className="w-4 h-4 mr-2" />
-                      Upload Photo
+                      <Upload className={styles.buttonIcon} />
+                      <span className={styles.buttonText}>Upload Photo</span>
                     </>
                   )}
-                </Button>
+                </button>
 
                 {formData.profileImage && (
-                  <Button
+                  <button
                     type="button"
-                    variant="outline"
                     onClick={handleRemoveImage}
+                    className={styles.button}
                   >
                     Remove
-                  </Button>
+                  </button>
                 )}
               </div>
 
@@ -206,19 +200,17 @@ export const EditModal = ({
                 type="file"
                 accept="image/*"
                 onChange={onImageUpload}
-                className="hidden"
+                className={styles.hiddenInput}
               />
 
-              <p className="text-xs text-gray-500 text-center">
+              <p className={styles.uploadInfo}>
                 Supported formats: JPG, PNG, GIF (Max 5MB)
               </p>
             </div>
           </div>
 
-          <div className="space-y-4">
-            <h3 className="font-semibold text-lg border-b pb-2">
-              Basic Information
-            </h3>
+          <div className={styles.section}>
+            <h3 className={styles.sectionTitle}>Basic Information</h3>
 
             {renderFormField(
               "name",
@@ -235,68 +227,63 @@ export const EditModal = ({
               formErrors.designation
             )}
 
-            <div className="space-y-2">
-              <Label htmlFor="bio" className="text-sm font-medium">
+            <div className={styles.formField}>
+              <label htmlFor="bio" className={styles.label}>
                 Bio
-              </Label>
-              <Textarea
+              </label>
+              <textarea
                 id="bio"
                 value={formData.bio}
                 onChange={(e) => onInputChange("bio", e.target.value)}
                 placeholder="Tell us about yourself..."
-                className="w-full h-20 resize-none"
+                className={styles.textarea}
               />
             </div>
           </div>
 
-          <div className="space-y-4">
-            <h3 className="font-semibold text-lg border-b pb-2">Skills</h3>
-            <div className="space-y-3">
-              <div className="flex space-x-2">
-                <Input
+          <div className={styles.section}>
+            <h3 className={styles.sectionTitle}>Skills</h3>
+            <div className={styles.skillsContainer}>
+              <div className={styles.skillsInputRow}>
+                <input
                   value={newSkill}
                   onChange={(e) => setNewSkill(e.target.value)}
                   placeholder="Add a skill..."
-                  className="flex-1"
+                  className={`${styles.input} ${styles.skillsInput}`}
                   onKeyPress={handleSkillKeyPress}
                 />
-                <Button
+                <button
                   onClick={onAddSkill}
-                  size="sm"
-                  className="bg-[#7E30E1] hover:bg-[#49108B] text-white"
+                  className={`${styles.button} ${styles.buttonPrimary} ${styles.addButton}`}
+                  type="button"
                 >
-                  <Plus className="w-4 h-4" />
-                </Button>
+                  <Plus className={styles.buttonIcon} />
+                </button>
               </div>
 
-              <div className="flex flex-wrap gap-2">
+              <div className={styles.skillsList}>
                 {formData.skills.map((skill, index) => (
-                  <Badge
-                    key={index}
-                    variant="secondary"
-                    className="bg-[#7E30E1]/10 text-[#7E30E1] border-[#7E30E1]/20 flex items-center gap-1"
-                  >
-                    {skill}
+                  <div key={index} className={styles.skillBadge}>
+                    <span className={styles.skillText}>{skill}</span>
                     <button
                       onClick={() => onRemoveSkill(skill)}
-                      className="ml-1 hover:text-red-500 transition-colors"
+                      className={styles.skillRemove}
+                      type="button"
                     >
-                      <Minus className="w-3 h-3" />
+                      <Minus className={styles.skillRemoveIcon} />
                     </button>
-                  </Badge>
+                  </div>
                 ))}
               </div>
             </div>
           </div>
 
-          <div className="space-y-4">
-            <h3 className="font-semibold text-lg border-b pb-2">
-              Social Links
-            </h3>
+          <div className={styles.section}>
+            <h3 className={styles.sectionTitle}>Social Links</h3>
 
             {renderSocialField(
               "linkedin",
-              <Linkedin className="w-4 h-4 text-blue-600" />,
+              <Linkedin className={styles.linkedinIcon} />,
               "LinkedIn Profile URL",
               "https://linkedin.com/in/yourprofile",
               formData.socialLinks.linkedin,
@@ -305,7 +292,7 @@ export const EditModal = ({
 
             {renderSocialField(
               "instagram",
-              <Instagram className="w-4 h-4 text-pink-600" />,
+              <Instagram className={styles.instagramIcon} />,
               "Instagram Profile URL",
               "https://instagram.com/yourprofile",
               formData.socialLinks.instagram,
@@ -314,7 +301,7 @@ export const EditModal = ({
 
             {renderSocialField(
               "email",
-              <Mail className="w-4 h-4 text-blue-500" />,
+              <Mail className={styles.emailIcon} />,
               "Email Address",
               "your.email@example.com",
               formData.socialLinks.email,
@@ -323,7 +310,7 @@ export const EditModal = ({
 
             {renderSocialField(
               "github",
-              <Github className="w-4 h-4 text-gray-800" />,
+              <Github className={styles.githubIcon} />,
               "GitHub Profile URL",
               "https://github.com/yourprofile",
               formData.socialLinks.github,
@@ -331,16 +318,19 @@ export const EditModal = ({
             )}
           </div>
 
-          <div className="flex space-x-3 pt-4">
-            <Button
+          <div className={styles.buttonGroup}>
+            <button
               onClick={onSave}
-              className="flex-1 bg-[#7E30E1] hover:bg-[#49108B] text-white"
+              className={`${styles.button} ${styles.buttonPrimary} ${styles.buttonFull}`}
             >
               Save Changes
-            </Button>
-            <Button onClick={onCancel} variant="outline" className="flex-1">
+            </button>
+            <button
+              onClick={onCancel}
+              className={`${styles.button} ${styles.buttonFull}`}
+            >
               Cancel
-            </Button>
+            </button>
           </div>
         </div>
       </DialogContent>
