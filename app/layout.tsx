@@ -8,10 +8,12 @@ const defaultUrl = process.env.VERCEL_URL
   : "http://localhost:3000";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
-};
+  title: "Grohub - Skill Development Platform",
+  description:
+    "Unlock your potential with Grohub. Transform your career with our comprehensive skill development platform.",
+    generator: 'v0.dev'
+}
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
