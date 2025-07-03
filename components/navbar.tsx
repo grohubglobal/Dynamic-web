@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Menu, X, ChevronLeft, ChevronRight } from "lucide-react"
 import JoinNowModal from "./join-now-modal"
 import DashboardButton from "./dashboard-button"
+import Image from "next/image"
+import logo from "../public/grohub-logo.png"
 
 interface NavbarProps {
   currentUser?: any
@@ -63,19 +65,17 @@ export default function Navbar({ currentUser, onUserRegistered, onViewFullDashbo
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-200" : "bg-white/90 backdrop-blur-sm"
+        isScrolled ? " backdrop-blur-lg shadow-lg border-b border-gray-200" : " backdrop-blur-sm"
       }`}
     >
       <div className="container mx-auto px-4 lg:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200 shadow-lg">
-              <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center">
-                <div className="w-3 h-3 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full"></div>
-              </div>
+            <div className="w-24 h-24   flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200 ">
+               <Image src={logo} alt="logo"/>
             </div>
-            <span className="text-2xl font-bold text-gray-900">Grohub.</span>
+            
           </Link>
 
           {/* Central Navigation Bubble - Desktop */}
@@ -146,9 +146,9 @@ export default function Navbar({ currentUser, onUserRegistered, onViewFullDashbo
                 <JoinNowModal onUserRegistered={onUserRegistered}>
                   <Button
                     variant="ghost"
-                    className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all duration-200 text-sm font-medium"
+                    className="text-black hover:text-gray-900 transition-all duration-200 text-sm font-medium"
                   >
-                    Login / Sign-up
+                  Join now 
                   </Button>
                 </JoinNowModal>
               </div>
@@ -191,8 +191,8 @@ export default function Navbar({ currentUser, onUserRegistered, onViewFullDashbo
               {!currentUser && (
                 <div className="pt-4 border-t border-gray-200">
                   <JoinNowModal onUserRegistered={onUserRegistered}>
-                    <Button className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white">
-                      Login / Sign-up
+                    <Button className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-black">
+                     Join now
                     </Button>
                   </JoinNowModal>
                 </div>
