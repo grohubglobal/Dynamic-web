@@ -187,7 +187,7 @@ export default function Navbar({
             <Button
               variant="ghost"
               size="sm"
-              className="md:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+              className="md:hidden p-2 text-white hover:text-gray-900 hover:bg-gray-100"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? (
