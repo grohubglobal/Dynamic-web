@@ -1,33 +1,61 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Menu, X, ChevronLeft, ChevronRight } from "lucide-react"
-import JoinNowModal from "./join-now-modal"
-import DashboardButton from "./dashboard-button"
-import Image from "next/image"
-import logo from "../public/grohub-logo.png"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Menu, X, ChevronLeft, ChevronRight } from "lucide-react";
+import JoinNowModal from "./join-now-modal";
+import Image from "next/image";
+import logo from "../public/grohub-logo.png";
 
 interface NavbarProps {
-  currentUser?: any
-  onUserRegistered?: (userData: any) => void
-  onViewFullDashboard?: () => void
-  onLogout?: () => void
+  onUserRegistered?: (userData: any) => void;
+  onViewFullDashboard?: () => void;
+  onLogout?: () => void;
 }
 
-export default function Navbar({ currentUser, onUserRegistered, onViewFullDashboard, onLogout }: NavbarProps) {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [currentIndex, setCurrentIndex] = useState(0)
+export default function Navbar({
+
+  onUserRegistered,
+  
+}: NavbarProps) {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
+  const sectionIds = navigationItems.map(item => item.href.replace("#", ""));
+  const sections = sectionIds.map(id => document.getElementById(id));
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = sections.findIndex((sec) => sec === entry.target);
+          if (index !== -1) {
+            setCurrentIndex(index);
+          }
+        }
+      });
+    },
+    {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.5, // section is considered visible when 50% is in viewport
     }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  );
+
+  sections.forEach((section) => {
+    if (section) observer.observe(section);
+  });
+
+  return () => {
+    sections.forEach((section) => {
+      if (section) observer.unobserve(section);
+    });
+  };
+}, []);
+
 
   const navigationItems = [
     { href: "#home", label: "Home" },
@@ -37,35 +65,40 @@ export default function Navbar({ currentUser, onUserRegistered, onViewFullDashbo
     { href: "#interests", label: "Interests" },
     { href: "#resources", label: "Resources" },
     { href: "#start-learning", label: "Start Learning" },
-  ]
+  ];
 
   const navigateNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % navigationItems.length)
-  }
+    setCurrentIndex((prev) => (prev + 1) % navigationItems.length);
+  };
 
   const navigatePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + navigationItems.length) % navigationItems.length)
-  }
+    setCurrentIndex(
+      (prev) => (prev - 1 + navigationItems.length) % navigationItems.length
+    );
+  };
 
   const handleItemClick = (index: number) => {
-    setCurrentIndex(index)
-    const element = document.querySelector(navigationItems[index].href)
+    setCurrentIndex(index);
+    const element = document.querySelector(navigationItems[index].href);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+      element.scrollIntoView({ behavior: "smooth" });
     }
-  }
+  };
 
-  const getPrevIndex = () => (currentIndex - 1 + navigationItems.length) % navigationItems.length
-  const getNextIndex = () => (currentIndex + 1) % navigationItems.length
+  const getPrevIndex = () =>
+    (currentIndex - 1 + navigationItems.length) % navigationItems.length;
+  const getNextIndex = () => (currentIndex + 1) % navigationItems.length;
 
-  const prevItem = navigationItems[getPrevIndex()]
-  const currentItem = navigationItems[currentIndex]
-  const nextItem = navigationItems[getNextIndex()]
+  const prevItem = navigationItems[getPrevIndex()];
+  const currentItem = navigationItems[currentIndex];
+  const nextItem = navigationItems[getNextIndex()];
 
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? " backdrop-blur-lg shadow-lg border-b border-gray-200" : " backdrop-blur-sm"
+        isScrolled
+          ? " backdrop-blur-lg shadow-lg border-b border-gray-200"
+          : " backdrop-blur-sm"
       }`}
     >
       <div className="container mx-auto px-4 lg:px-6">
@@ -73,9 +106,8 @@ export default function Navbar({ currentUser, onUserRegistered, onViewFullDashbo
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
             <div className="w-24 h-24   flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200 ">
-               <Image src={logo} alt="logo"/>
+              <Image src={logo} alt="logo" />
             </div>
-            
           </Link>
 
           {/* Central Navigation Bubble - Desktop */}
@@ -94,8 +126,8 @@ export default function Navbar({ currentUser, onUserRegistered, onViewFullDashbo
               <Link
                 href={prevItem.href}
                 onClick={(e) => {
-                  e.preventDefault()
-                  handleItemClick(getPrevIndex())
+                  e.preventDefault();
+                  handleItemClick(getPrevIndex());
                 }}
                 className="px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 whitespace-nowrap bg-gray-200/60 text-gray-500 hover:bg-gray-300/60 hover:text-gray-600 blur-[1px] opacity-60"
               >
@@ -106,8 +138,8 @@ export default function Navbar({ currentUser, onUserRegistered, onViewFullDashbo
               <Link
                 href={currentItem.href}
                 onClick={(e) => {
-                  e.preventDefault()
-                  handleItemClick(currentIndex)
+                  e.preventDefault();
+                  handleItemClick(currentIndex);
                 }}
                 className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap bg-purple-600 text-white shadow-md hover:bg-purple-700"
               >
@@ -118,8 +150,8 @@ export default function Navbar({ currentUser, onUserRegistered, onViewFullDashbo
               <Link
                 href={nextItem.href}
                 onClick={(e) => {
-                  e.preventDefault()
-                  handleItemClick(getNextIndex())
+                  e.preventDefault();
+                  handleItemClick(getNextIndex());
                 }}
                 className="px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 whitespace-nowrap bg-gray-200/60 text-gray-500 hover:bg-gray-300/60 hover:text-gray-600 blur-[1px] opacity-60"
               >
@@ -139,20 +171,18 @@ export default function Navbar({ currentUser, onUserRegistered, onViewFullDashbo
 
           {/* Right Side */}
           <div className="flex items-center space-x-4">
-            {currentUser ? (
-              <DashboardButton userData={currentUser} onViewFullDashboard={onViewFullDashboard!} onLogout={onLogout!} />
-            ) : (
+          
               <div className="hidden md:flex items-center space-x-4">
                 <JoinNowModal onUserRegistered={onUserRegistered}>
                   <Button
                     variant="ghost"
                     className="text-black hover:text-gray-900 transition-all duration-200 text-sm font-medium"
                   >
-                  Join now 
+                    Join now
                   </Button>
                 </JoinNowModal>
               </div>
-            )}
+       
 
             <Button
               variant="ghost"
@@ -160,7 +190,11 @@ export default function Navbar({ currentUser, onUserRegistered, onViewFullDashbo
               className="md:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isMobileMenuOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
             </Button>
           </div>
         </div>
@@ -179,24 +213,24 @@ export default function Navbar({ currentUser, onUserRegistered, onViewFullDashbo
                       : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                   }`}
                   onClick={(e) => {
-                    e.preventDefault()
-                    handleItemClick(index)
-                    setIsMobileMenuOpen(false)
+                    e.preventDefault();
+                    handleItemClick(index);
+                    setIsMobileMenuOpen(false);
                   }}
                 >
                   {item.label}
                 </Link>
               ))}
 
-              {!currentUser && (
+        
                 <div className="pt-4 border-t border-gray-200">
                   <JoinNowModal onUserRegistered={onUserRegistered}>
                     <Button className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-black">
-                     Join now
+                      Join now
                     </Button>
                   </JoinNowModal>
                 </div>
-              )}
+              
             </div>
           </div>
         )}
@@ -210,12 +244,14 @@ export default function Navbar({ currentUser, onUserRegistered, onViewFullDashbo
               key={index}
               onClick={() => handleItemClick(index)}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentIndex ? "bg-purple-600 scale-125 shadow-lg" : "bg-gray-300 hover:bg-gray-400"
+                index === currentIndex
+                  ? "bg-purple-600 scale-125 shadow-lg"
+                  : "bg-gray-300 hover:bg-gray-400"
               }`}
             />
           ))}
         </div>
       </div>
     </nav>
-  )
+  );
 }

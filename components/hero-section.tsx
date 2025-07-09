@@ -6,7 +6,7 @@ import { ArrowRight, Play, Users, Award, BookOpen, TrendingUp } from "lucide-rea
 
 export default function HeroSection() {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section id="home"  className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-purple-800 to-gray-900" />
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
