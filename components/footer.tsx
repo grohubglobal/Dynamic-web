@@ -13,17 +13,17 @@ const userful = [
 ];
 const Footer = () => {
   return (
-    <footer className=" bg-gradient-to-b from-gray-900 to-purple-900">
+    <footer className=" bg-gradient-to-b from-gray-900 to-purple-900  ">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-5" />
       <div className="absolute top-10 right-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl animate-pulse" />
       <div className="absolute bottom-10 left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
       
-      <div className=" pb-10 md:flex justify-around items-center">
+      <div className="  md:grid  grid-cols-2 place-items-center">
         
       {/* logo */}
       <div className="hidden md:block ">
-        <Image  src={Logo} alt="footer logo" />
+        <Image  src={Logo} alt="footer logo" className="w-96" />
       </div>
       {/* content */}
       <div className="flex justify-between space-x-10 md:space-x-20">
@@ -32,7 +32,7 @@ const Footer = () => {
           <h1 className="font-semibold text-2xl text-center pb-5">
             Useful links
           </h1>
-          <div className="border-l-4  border-white px-10 space-y-3">
+          <div className="border-l-4  border-white px-10 space-y-3 gap-5"> 
             {userful.map((item, index) => (
               <div key={index} className="cursor-pointer">
                 <Link

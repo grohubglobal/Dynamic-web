@@ -176,7 +176,7 @@ export default function Navbar({
                 <JoinNowModal onUserRegistered={onUserRegistered}>
                   <Button
                     variant="ghost"
-                    className="text-black hover:text-gray-900 transition-all duration-200 text-sm font-medium"
+                    className=" bg-gray-100 rounded-md hover:bg-gray-300 text-gray-600 hover:text-gray-900 transition-all duration-200 text-sm font-medium"
                   >
                     Join now
                   </Button>
@@ -223,9 +223,9 @@ export default function Navbar({
               ))}
 
         
-                <div className="pt-4 border-t border-gray-200">
+                <div className="pt-4 border-t border-gray-200 grid place-items-center">
                   <JoinNowModal onUserRegistered={onUserRegistered}>
-                    <Button className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-black">
+                    <Button className="w-fit px-24  bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-black">
                       Join now
                     </Button>
                   </JoinNowModal>
