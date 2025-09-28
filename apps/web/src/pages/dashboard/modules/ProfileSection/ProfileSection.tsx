@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import type { ProfileData } from "../../utils/types";
 import Image from "next/image";
-import { VelocityScroll } from "@/components/magicui/scroll-based-velocity";
+import { VelocityScroll } from "@/components/ui/scroll-based-velocity";
 import styles from "./ProfileSection.module.css";
 
 interface ProfileSectionProps {
