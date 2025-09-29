@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronLeft, ChevronRight } from "lucide-react";
 import JoinNowModal from "./join-now-modal";
 import Image from "next/image";
-import logo from "../public/grohub-logo.png";
 
 interface NavbarProps {
   onUserRegistered?: (userData: any) => void;
@@ -103,7 +102,7 @@ export default function Navbar({ onUserRegistered }: NavbarProps) {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
             <div className="w-24 h-24   flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200 ">
-              <Image src={logo} alt="logo" />
+              <Image src="/Dynamic-web/grohub-logo.png" alt="logo" />
             </div>
           </Link>
 
