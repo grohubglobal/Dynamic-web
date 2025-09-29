@@ -3,11 +3,13 @@
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
-    "build": "tsdown",
+    "build": "wrangler deploy --dry-run",
     "check-types": "tsc -b",
     "compile": "bun build --compile --minify --sourcemap --bytecode ./src/index.ts --outfile server",
-    "dev": "bun run --hot src/index.ts",
-    "start": "bun run dist/index.js"
+    "dev": "wrangler dev --port=3000",
+    "start": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {
     "dotenv": "^17.2.1",
@@ -17,6 +19,7 @@
   "devDependencies": {
     "tsdown": "^0.15.1",
     "typescript": "^5.8.2",
-    "@types/bun": "^1.2.6"
+    "wrangler": "^4.23.0",
+    "@types/node": "^22.13.11"
   }
 }

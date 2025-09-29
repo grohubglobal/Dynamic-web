@@ -1,0 +1,544 @@
+/* [project]/app/dashboard/modules/Share/Share.module.css [app-client] (css) */
+.Share-module__Qvyiia__modal {
+  color: #000;
+  width: 100%;
+  max-width: 100vw;
+  box-shadow: none;
+  background: #fff;
+  border-radius: 0;
+  margin: 0;
+}
+
+.Share-module__Qvyiia__header {
+  text-align: center;
+  border-bottom: 1px solid #f3f4f6;
+  padding: .75rem .5rem .5rem;
+}
+
+.Share-module__Qvyiia__title {
+  color: #1f2937;
+  margin: 0;
+  font-size: .9375rem;
+  font-weight: 700;
+}
+
+.Share-module__Qvyiia__content {
+  flex-direction: column;
+  gap: 1rem;
+  padding: .5rem;
+  display: flex;
+}
+
+.Share-module__Qvyiia__preview {
+  color: #fff;
+  background: linear-gradient(135deg, #49108b, #7e30e1);
+  border-radius: .625rem;
+  padding: .75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.Share-module__Qvyiia__preview:before {
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(45deg, #0000 30%, #ffffff1a 50%, #0000 70%);
+  position: absolute;
+  inset: 0;
+}
+
+.Share-module__Qvyiia__profileSection {
+  z-index: 1;
+  align-items: center;
+  gap: .5rem;
+  display: flex;
+  position: relative;
+}
+
+.Share-module__Qvyiia__avatar {
+  background: #fff3;
+  border: 1px solid #ffffff4d;
+  border-radius: 50%;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1rem;
+  display: flex;
+  overflow: hidden;
+}
+
+.Share-module__Qvyiia__avatarImage {
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.Share-module__Qvyiia__profileInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.Share-module__Qvyiia__profileInfo h3 {
+  word-break: break-word;
+  margin: 0 0 .125rem;
+  font-size: .8125rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.Share-module__Qvyiia__profileInfo p {
+  color: #ffffffd9;
+  word-break: break-word;
+  margin: 0;
+  font-size: .6875rem;
+  line-height: 1.3;
+}
+
+.Share-module__Qvyiia__messageSection {
+  flex-direction: column;
+  gap: .375rem;
+  display: flex;
+}
+
+.Share-module__Qvyiia__label {
+  color: #374151;
+  margin: 0;
+  font-size: .75rem;
+  font-weight: 500;
+}
+
+.Share-module__Qvyiia__textarea {
+  resize: none;
+  color: #374151;
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  border-radius: .375rem;
+  width: 100%;
+  height: 5.5rem;
+  padding: .625rem;
+  font-family: inherit;
+  font-size: .6875rem;
+  line-height: 1.4;
+  transition: border-color .2s;
+}
+
+.Share-module__Qvyiia__textarea:focus {
+  border-color: #7e30e1;
+  outline: none;
+  box-shadow: 0 0 0 2px #7e30e11a;
+}
+
+.Share-module__Qvyiia__shareSection {
+  flex-direction: column;
+  gap: .625rem;
+  display: flex;
+}
+
+.Share-module__Qvyiia__buttonGrid {
+  grid-template-columns: 1fr 1fr;
+  gap: .5rem;
+  display: grid;
+}
+
+.Share-module__Qvyiia__shareButton {
+  cursor: pointer;
+  color: #374151;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: .5rem;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+  min-height: 3rem;
+  padding: 1rem .75rem;
+  font-size: .875rem;
+  font-weight: 500;
+  transition: all .2s;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.Share-module__Qvyiia__shareButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px #00000026;
+}
+
+.Share-module__Qvyiia__shareButton:focus {
+  outline-offset: 1px;
+  outline: 2px solid #7e30e1;
+}
+
+.Share-module__Qvyiia__shareButton:active {
+  transform: translateY(0);
+}
+
+.Share-module__Qvyiia__copyButton {
+  color: #374151;
+  background: #fff;
+  border: 1px solid #d1d5db;
+}
+
+.Share-module__Qvyiia__copyButton:hover {
+  background: #f9fafb;
+}
+
+.Share-module__Qvyiia__twitterButton {
+  color: #fff;
+  background: #1da1f2;
+  border-color: #1da1f2;
+}
+
+.Share-module__Qvyiia__twitterButton:hover {
+  background: #1a91da;
+  border-color: #1a91da;
+}
+
+.Share-module__Qvyiia__facebookButton {
+  color: #fff;
+  background: #1877f2;
+  border-color: #1877f2;
+}
+
+.Share-module__Qvyiia__facebookButton:hover {
+  background: #166fe5;
+  border-color: #166fe5;
+}
+
+.Share-module__Qvyiia__linkedinButton {
+  color: #fff;
+  background: #0077b5;
+  border-color: #0077b5;
+}
+
+.Share-module__Qvyiia__linkedinButton:hover {
+  background: #006ba1;
+  border-color: #006ba1;
+}
+
+.Share-module__Qvyiia__buttonIcon {
+  flex-shrink: 0;
+  width: .75rem;
+  height: .75rem;
+}
+
+@media (width <= 320px) {
+  .Share-module__Qvyiia__modal {
+    border-radius: 0;
+    max-width: 100vw;
+    margin: 0;
+  }
+
+  .Share-module__Qvyiia__content {
+    gap: .75rem;
+    padding: .75rem;
+  }
+
+  .Share-module__Qvyiia__preview {
+    padding: .75rem;
+  }
+
+  .Share-module__Qvyiia__avatar {
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: .875rem;
+  }
+
+  .Share-module__Qvyiia__profileInfo h3 {
+    font-size: .8125rem;
+  }
+
+  .Share-module__Qvyiia__profileInfo p {
+    font-size: .6875rem;
+  }
+
+  .Share-module__Qvyiia__textarea {
+    height: 4.5rem;
+    padding: .625rem;
+    font-size: .75rem;
+  }
+
+  .Share-module__Qvyiia__shareButton {
+    gap: .375rem;
+    min-height: 2.75rem;
+    padding: .75rem .5rem;
+    font-size: .75rem;
+  }
+
+  .Share-module__Qvyiia__buttonIcon {
+    width: .875rem;
+    height: .875rem;
+  }
+
+  .Share-module__Qvyiia__buttonGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: .625rem;
+  }
+}
+
+@media (width >= 321px) and (width <= 374px) {
+  .Share-module__Qvyiia__modal {
+    border-radius: .5rem;
+    max-width: calc(100vw - .5rem);
+    margin: .25rem;
+  }
+
+  .Share-module__Qvyiia__content {
+    gap: .875rem;
+    padding: .875rem;
+  }
+
+  .Share-module__Qvyiia__avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+
+  .Share-module__Qvyiia__shareButton {
+    min-height: 2.875rem;
+    font-size: .8125rem;
+  }
+
+  .Share-module__Qvyiia__buttonIcon {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+@media (width >= 375px) and (width <= 414px) {
+  .Share-module__Qvyiia__modal {
+    border-radius: .75rem;
+    max-width: calc(100vw - 1rem);
+    margin: .5rem;
+  }
+
+  .Share-module__Qvyiia__title {
+    font-size: 1.125rem;
+  }
+
+  .Share-module__Qvyiia__content {
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .Share-module__Qvyiia__avatar {
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1.125rem;
+  }
+
+  .Share-module__Qvyiia__profileInfo h3 {
+    font-size: .9375rem;
+  }
+
+  .Share-module__Qvyiia__profileInfo p {
+    font-size: .8125rem;
+  }
+
+  .Share-module__Qvyiia__textarea {
+    height: 5rem;
+    font-size: .8125rem;
+  }
+
+  .Share-module__Qvyiia__shareButton {
+    min-height: 3rem;
+    padding: .875rem .625rem;
+    font-size: .875rem;
+  }
+}
+
+@media (width >= 415px) and (width <= 480px) {
+  .Share-module__Qvyiia__modal {
+    max-width: calc(100vw - 1rem);
+    margin: .5rem;
+  }
+
+  .Share-module__Qvyiia__title {
+    font-size: 1.25rem;
+  }
+
+  .Share-module__Qvyiia__avatar {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.25rem;
+  }
+
+  .Share-module__Qvyiia__buttonGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: .5rem;
+  }
+
+  .Share-module__Qvyiia__shareButton {
+    gap: .375rem;
+    min-height: 2.75rem;
+    padding: .75rem .5rem;
+    font-size: .75rem;
+  }
+}
+
+@media (width >= 481px) and (width <= 640px) {
+  .Share-module__Qvyiia__modal {
+    border-radius: 1rem;
+    max-width: 24rem;
+    margin: 1rem auto;
+  }
+
+  .Share-module__Qvyiia__content {
+    gap: 1.25rem;
+    padding: 1.25rem;
+  }
+
+  .Share-module__Qvyiia__buttonGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: .75rem;
+  }
+
+  .Share-module__Qvyiia__shareButton {
+    min-height: 3rem;
+    padding: .875rem .625rem;
+    font-size: .8125rem;
+  }
+
+  .Share-module__Qvyiia__textarea {
+    height: 5.5rem;
+    font-size: .875rem;
+  }
+}
+
+@media (width >= 641px) and (width <= 768px) {
+  .Share-module__Qvyiia__modal {
+    max-width: 26rem;
+    margin: 1.5rem auto;
+  }
+
+  .Share-module__Qvyiia__title {
+    font-size: 1.375rem;
+  }
+
+  .Share-module__Qvyiia__content {
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .Share-module__Qvyiia__avatar {
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 1.5rem;
+  }
+
+  .Share-module__Qvyiia__shareButton {
+    min-height: 3.25rem;
+    font-size: .875rem;
+  }
+}
+
+@media (width >= 769px) and (width <= 1024px) {
+  .Share-module__Qvyiia__modal {
+    max-width: 28rem;
+    margin: 2rem auto;
+  }
+
+  .Share-module__Qvyiia__title {
+    font-size: 1.5rem;
+  }
+
+  .Share-module__Qvyiia__content {
+    gap: 1.75rem;
+    padding: 1.75rem;
+  }
+
+  .Share-module__Qvyiia__shareButton {
+    min-height: auto;
+    padding: 1rem .875rem;
+    font-size: .9375rem;
+  }
+}
+
+@media (width >= 1025px) and (width <= 1280px) {
+  .Share-module__Qvyiia__modal {
+    max-width: 30rem;
+  }
+
+  .Share-module__Qvyiia__content {
+    padding: 2rem;
+  }
+}
+
+@media (width >= 1281px) {
+  .Share-module__Qvyiia__modal {
+    max-width: 32rem;
+  }
+}
+
+@media (height <= 600px) {
+  .Share-module__Qvyiia__textarea {
+    height: 4rem;
+  }
+
+  .Share-module__Qvyiia__content {
+    gap: .75rem;
+    padding: .75rem;
+  }
+}
+
+@media (height <= 500px) {
+  .Share-module__Qvyiia__textarea {
+    height: 3.5rem;
+  }
+
+  .Share-module__Qvyiia__content {
+    gap: .5rem;
+    padding: .5rem;
+  }
+
+  .Share-module__Qvyiia__preview {
+    padding: .625rem;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .Share-module__Qvyiia__shareButton {
+    min-height: 3.5rem;
+    padding: 1rem .875rem;
+    font-size: .9375rem;
+  }
+
+  .Share-module__Qvyiia__shareButton:hover {
+    transform: none;
+    box-shadow: 0 4px 12px #0003;
+  }
+
+  .Share-module__Qvyiia__textarea {
+    min-height: 3.5rem;
+    padding: .875rem;
+    font-size: .9375rem;
+  }
+}
+
+@media (orientation: landscape) and (height <= 500px) {
+  .Share-module__Qvyiia__buttonGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: .5rem;
+  }
+
+  .Share-module__Qvyiia__shareButton {
+    min-height: 2.5rem;
+    padding: .625rem .5rem;
+    font-size: .75rem;
+  }
+}
+
+@media (resolution >= 192dpi) {
+  .Share-module__Qvyiia__modal {
+    border: .5px solid #0000001a;
+  }
+
+  .Share-module__Qvyiia__shareButton {
+    border-width: .5px;
+  }
+}
+
+/*# sourceMappingURL=app_dashboard_modules_Share_Share_module_css_f9ee138c._.single.css.map*/
