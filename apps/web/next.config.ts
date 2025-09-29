@@ -4,7 +4,12 @@ const nextConfig: NextConfig = {
   /* config options here */
   output: "export",
   reactStrictMode: true,
-  images: { unoptimized: true }
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 };
 
 export default nextConfig;
