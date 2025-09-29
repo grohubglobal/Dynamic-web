@@ -10,7 +10,7 @@ export const Banner = () => (
     <div className={styles.content}>
       <div className={styles.logoContainer}>
         <Image
-          src="/grohub-logo.png"
+          src="/Dynamic-web/grohub-logo.png"
           width={160}
           height={160}
           alt="Grohub Logo"

@@ -102,7 +102,7 @@ export default function Navbar({ onUserRegistered }: NavbarProps) {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
             <div className="w-24 h-24   flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200 ">
-              <Image src="/grohub-logo.png" alt="logo" />
+              <Image src="/Dynamic-web/grohub-logo.png" alt="logo" />
             </div>
           </Link>
 
