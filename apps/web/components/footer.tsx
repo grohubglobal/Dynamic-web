@@ -22,7 +22,7 @@ const Footer = () => {
         {/* logo */}
         <div className="hidden md:block ">
           <Image
-            src="/Dynamic-web/grohub-logo.png"
+            src="/grohub-logo.png"
             alt="footer logo"
             className="w-96"
           />
